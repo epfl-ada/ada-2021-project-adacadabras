@@ -30,6 +30,6 @@ ___Study of the influence of the movement on women's mediatic representation___
 ## Proposed timeline
 
 ## Organization within the team
-## Questions for TA
+## Questions for TA (optional)
 
 

@@ -28,11 +28,11 @@ ___Study of the influence of the movement on women's mediatic representation___
 **Step 1: Data scraping, pre-processing and dataset construction**
 - Dataset D1 : General dataset containing quotes of women authors
 - Dataset D2 : MeToo dataset containing quotes linked to the movement, in which the movement is mentioned
-	D2.1 : Subsets by gender of speaker
-	D2.2 : Subsets by age of speaker
-	D2.3 : Subsets by political parties (for politician authors) of speaker
+	- D2.1 : Subsets by gender of speaker
+	- D2.2 : Subsets by age of speaker
+	- D2.3 : Subsets by political parties (for politician authors) of speaker
 - Dataset D3 : Dataset containing quotes in which a woman is mentioned
-    D3.1: Subset by gender of speaker
+    - D3.1: Subset by gender of speaker
 
 
 ## Proposed timeline

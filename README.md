@@ -11,7 +11,7 @@ ___Study of the influence of the movement on women's mediatic representation___
 
 ## Proposed additional dataset
 *  **AD1 : Wikidata speakers_attribute.parquet** (https://drive.google.com/drive/folders/1VAFHacZFh0oxSxilgNByb1nlNsqznUf0): dataset provided in the scope of the ADA course, to access Wikidata metadata on Quotebank speakers. The format of the data can be found in the schema_speakers_attribute.txt. We will scrap only the attributes "fields date_of_birth", "party" and "gender" for the investigation of biases in the speakers addressing the MeToo movement in medias.
-*  **AD2 : AMI (Automatic Misogyny Detection) Iber Eval dataset** (https://drive.google.com/drive/folders/13UfLXcPTvT9bEAPP8tLj2quXGGa2gsTq) : dataset created to train NLP models to detect misogynistic speech in tweets and online content. The dataset is open source but an access authorization must be requested to access the data and we thus haven’t been able to explore the data yet. However, by reading research paper that were using the same dataset and a documentation provided on the AMI website, we already know the following:
+*  **AD2 : AMI (Automatic Misogyny Detection) Iber Eval dataset** (https://drive.google.com/drive/folders/13UfLXcPTvT9bEAPP8tLj2quXGGa2gsTq) : dataset created to train NLP models to detect misogynistic speech in tweets and online content. The dataset is open source but an access authorization must be requested to access the data and we thus haven’t been able to explore the data yet. However, by reading the documentation provided on the AMI website, we already know the following:
     * Divided into a train and test dataset.
     * Train dataset : composed of 3’251 english and 3’307 spanish tweets. Spanish tweets will be deleted.
     * Tab-separated with the following fields: “id” “tweet” “misogynous” “misogyny_category” “target”.
@@ -20,24 +20,47 @@ ___Study of the influence of the movement on women's mediatic representation___
     * Size: ~300Ko.
 * **AD3 : Metooma dataset** (https://huggingface.co/datasets/metooma#social-impact-of-dataset / https://github.com/huggingface/datasets/blob/master/datasets/metooma/README.md): dataset similar to AMI composed of set of tweets belonging to the #MeToo movement, labelled to train NLP models to detect tone of speech and support or opposition to the movement. Here is a list of relevant information about it:
     *  Divided into a train (7979 english tweets) and test dataset (1996 english tweets).
-    * Tab-separated with the following fields: TweetId (string), Text_Only_Informative (class label), Image_Only_Informative (class label), Directed_Hate (class label), Generalized_Hate (class label), Sarcasm (class label), Allegation (class label), Justification (class label), Refutation (class label), Support (class label), Oppose (class label).
+    * Tab-separated with the following fields: TweetId, Text_Only_Informative, Image_Only_Informative, Directed_Hate, Generalized_Hate, Sarcasm, Allegation, Justification, Refutation, Support, Oppose.
     * Tweet contents should be accessed using TweetId and twitter API.
 * **AD4 : Allegations list** https://www.vox.com/a/sexual-harassment-assault-allegations-list/frankie-shaw : list of 262 CEO’s, celebrities, politicians and others who have been accused of sexual misconduct between 2017 and 2020 in the scope of the #MeToo movement. This list is available on the internet and will be extracted by scraping the HTML page of the website. Additional information on the profession of the aggressor is available in the data and might be used for further analysis. 
 
 ## Methods
-**Step 1: Data scraping, pre-processing and dataset construction**
+**Step 1: Data scraping, pre-processing and dataset construction.**
 - Dataset D1 : General dataset containing quotes of women authors
 - Dataset D2 : MeToo dataset containing quotes linked to the movement, in which the movement is mentioned
-	- D2.1 : Subsets by gender of speaker
-	- D2.2 : Subsets by age of speaker
-	- D2.3 : Subsets by political parties (for politician authors) of speaker
+    - D2.1 : Subsets by gender of speaker
+    - D2.2 : Subsets by age of speaker
+    - D2.3 : Subsets by political parties (for politician authors) of speaker
+    These subsets are built later on during Step 4.
 - Dataset D3 : Dataset containing quotes in which a woman is mentioned
     - D3.1: Subset by gender of speaker
 
+**Step 2: General preliminary analysis using Quotebank entire dataset**
+Weekly percentage of quotes by author’s gender (men, women, other, unkown) from 2015 to 2020. 
 
+**Step 3: Generate annual word clouds based on dataset D1.** 
+Library: https://github.com/amueller/word_cloud. 
+
+**Step 4: Investigate gender, political and generational biases in MeToo coverage using NLP to answer question A).**
+Train a SpaCy NLP model (https://spacy.io/usage/training) with dataset AD3 to perform sentiment analysis. Classification thanks to trained model on the whole dataset D2. Subdivision of D2 into D2.1, D2.2 and D2.3 for biases investigation. Clustering trials with unsupervised different ML algorithms applied on the sentiment analysis classification probabilities.
+
+**Step 5: Investigate general women perception via dataset D3 in medias to answer question B).**
+Generate word clouds. Classification of quotes : Text Blob or Vader models for positive, negative or neutral. Train SpaCy model on AD2 for misogynistic or non misogynistic. Classification thanks to trained model on D3. 
+
+**Step 6: Correlate and investigate causation between MeToo general perception and women’s mediatic place to answer question C).**
+Plot previously collected (step 5) data distributions according to time. Comparison with key turning points of MeToo. Investigation of the statistical significance of detected changes before and after MeToo.
+
+**Step 7: Github site building and Datastory redaction.**
+
+**Further details on the proposed data pipelines can be found in the notebook.**
 ## Proposed timeline
+Step 2: 22/11/21
+Step 3, 4: 29/11/21
+Step 5: 06/12/21
+Step 6, 7: 13/12/21
 
 ## Organization within the team
-## Questions for TA (optional)
-
-
+SpaCy Training on AD2 and AD3: Teammate 1
+Datastory: Teammate 2
+Website: Teammate 3 and 4
+Steps: Teammate 1,2,3,4

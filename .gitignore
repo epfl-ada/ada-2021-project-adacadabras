@@ -1,5 +1,6 @@
-# Jupyter Notebook checkpoint
+# Jupyter Notebook 
 .ipynb_checkpoints/
+local/
 
 # data and test folders
 data/*

@@ -1,0 +1,40 @@
+gender_names,gender_qids,speaker_qids,description
+--> Not repertiored [1] ???,Q15145782,Q78971059,-
+--> Not repertiored [2] ???,Q15145783,Q2078379,-
+Erkek,Q106299064,Q106375776,family name
+Gorō,Q8964773,Q1515301,male given name
+Taira no Kiyomori,Q281833,Q710537,Japanese samurai (1118-1181)
+X-gender,Q96000630,Q2336456,a third gender or non-binary gender identity that isn't male or female
+agender,Q505371,Q4754807,absence of a gender identity
+androgyny,Q207959,Q66283650,combination of male and female traits
+assigned female at birth,Q99485785,Q492190,gender identity assigned at birth
+bigender,Q859614,Q89485952,gender identity that includes any two gender identities and behaviors
+cisgender female,Q15145779,Q4769784,female person who was assigned female at birth
+cisgender male,Q15145778,Q53866350,male person who was assigned male at birth
+demiboy,Q93954933,Q63041986,gender identity where a person identifies as only partly male
+eunuch,Q179294,Q167105,castrated male human
+female,Q6581072,Q873,"to be used in ""sex or gender"" (P21) to indicate that the human subject is a female"
+female organism,Q43445,Q106044198,plant or animal which is female
+feminine,Q1775415,Q105908880,grammatical gender
+genderfluid,Q18116794,Q50825702,gender identity which doesn't conform to fixed gender roles or varies over time such as shifting between identifying as male and female
+genderqueer,Q12964198,Q15838567,range of gender identities that are not exclusively masculine or feminine and does not match with assigned sex
+homosexuality,Q6636,Q106401950,romantic or sexual attraction or behavior between members of the same sex or gender
+intersex,Q1097630,Q72636,innate variations in sex characteristics such that individuals differ from norms for male or female bodies
+kathoey,Q746411,Q105312093,third gender in Thai culture usually transgender woman or an effeminate gay male
+male,Q6581097,Q23,"to be used in ""sex or gender"" (P21) to indicate that the human subject is a male"
+male organism,Q44148,Q104420311,for use with plants or non-human animals; use Q6581097 for humans specifically
+muxe,Q3177577,Q98537077,Zapotec gender identity often regarded as transgender third gender or non-binary
+māhū,Q3277905,Q18921903,third gender in traditional Hawaiian Kanaka and Maohi cultures
+neutral sex,Q52261234,Q62571356,human who has neutral sex (use with Property:P21 sex or gender)
+neutrois,Q1289754,Q4685446,non-binary gender identity
+non-binary,Q48270,Q262772,range of gender identities that are not exclusively masculine or feminine
+pangender,Q7130936,Q12349932,non-binary gender defined as being more than one gender
+queer,Q51415,Q105763839,umbrella term for sexual and gender minorities that are not heterosexual heteronormative or cisgender
+shemale,Q1984232,Q842633,term primarily used in sex work to describe a transgender women with male genitalia and female secondary sex characteristics
+third gender,Q48279,Q16191502,set of gender identities that are not exclusively masculine or feminine
+transfeminine,Q27679684,Q715027,gender of individuals who were assigned male at birth but identify on the female side of the gender spectrum
+transgender female,Q1052281,Q11625,female person who was assigned a different gender at birth
+transgender male,Q2449503,Q213351,person assigned to the female sex at birth who identifies as a man or is situated within the male sex
+transgender person,Q189125,Q15906007,person whose gender identity is different from the gender they were assigned at birth
+transmasculine,Q27679766,Q29914316,gender of individuals who were assigned female at birth but identify on the male side of the gender spectrum
+two-spirit,Q301702,Q26252626,umbrella term for the third gender in the indigenous North American cultures

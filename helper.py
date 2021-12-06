@@ -2,31 +2,34 @@ from datetime import datetime
 
 ################################################### Keywords for data filtering #########################################
 # Talking about women, general women terminology
-general_dict = set(['woman', 'women', ' she ', ' her ', 'girl', 'daughter', 'mother',
-                    'sister', 'niece', 'female', 'wife', 'spouse', 'mistress', 'aunt',
-                    ' mom ', ' mom.', ' mum ', ' mum.', 'femme', 'grandma', 'lady', 'madam', ' ms.',
-                    ' mrs.', ' ms ', ' mrs ', ' maid ', 'bride', ' chick ', ' chick.',
-                    ' chicks ', ' chicks.', " she's ", " her's ", ' her.', ' she.'])
+general_dict = set(['woman', 'women', ' she ', ' she.', ' her ', ' her.', 'girl', 'daughter', 'mother',
+                    'sister', 'niece', 'female', 'wife', 'spouse', 'mistress', ' aunt ', ' aunt.', ' aunts ', ' aunts.',
+                    ' mom ', ' mom.', ' moms ', ' moms.', ' mum ', ' mum.', ' mums ', ' mums.', ' femme ', ' femme.', 'grandma',
+                    ' lady ', ' lady.', ' ladies ', ' ladies.', ' panty ', ' panty.', ' panties ', ' panties.',
+                    'madam', ' ms.', ' mrs.', ' ms ', ' mrs ', ' maid ', ' maid.', ' maids ', ' maids.', ' bride ', ' bride.', ' brides ',
+                    ' brides.', ' chick ', ' bridesmaid ', ' bridesmaid.', ' bridesmaids ', ' bridesmaids.',
+                    ' chick.', ' chicks ', ' chicks.', " she's ", " her's "
+                    ])
 
 # Feminine-biased nouns and substrings (Disclaimer: this doesn’t reflect our team’s gender views.)
 adj_dict = set(['slut', 'gold digger', 'bitch', 'prostitut', 'bimbo', 'actress',
-                'queen', 'princess', 'whore', ' loca ', 'goddess', 'maiden', ' loca.'
-                ' petite ', ' petite.', 'duchess', 'lesbian', 'fashionista', 'doll',
+                ' queen ', ' queen. ', ' queens ', ' queens. ', 'princess', 'whore', ' loca ', 'goddess', 'maiden', ' loca.'
+                ' petite ', ' petite.', ' petites ', ' petites.', 'duchess', 'lesbian', 'fashionista', 'doll',
                 'nymph', 'cougar', 'milf', 'virgin'])
 
 # Verbs related to women
 verb_dict = set(['marri', 'sleep with', 'marry', 'abortion', 'birth control'])
 
 # Terms/actions associated both to MeToo movement and women’s datasets
-action_dict = set(['harrass', 'rape', 'sex', 'domestic violence', 'domestic abuse',
-                   'misogyn'])
+action_dict = set(['harrass', ' rape ',' rape.',' raped ',' raped.', ' rapes ', ' rapes.', ' rapist ', ' rapist.', ' raping ', ' raping.',
+                   'sex', 'domestic violence', 'domestic abuse', 'misogyn'])
 
 # MeToo dictionary
 metoo_dict = set(['metoo', 'femin', 'feminism', 'feminist'])
 
 # Personnality MeToo dictionnary
 people_dict = set(['harvey weinstein', 'bill cosby', 'tarana burke', 'ambra gutierrez',
-                   'anastasia melnichenko', 'alyssa milano', 'r. kelly', 'r kelly',
+                   'anastasia melnichenko', 'alyssa milano', 'r. kelly', 'r kelly','rob kelly', 'robert kelly',
                    'larry nassar', 'reith raniere', 'allison mack',
                    'claude arnault'])
 

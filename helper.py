@@ -1,4 +1,8 @@
+import bz2
+import json
+import pickle as pkl
 from datetime import datetime
+import pandas as pd
 
 ################################################### Keywords for data filtering #########################################
 # Talking about women, general women terminology
@@ -59,7 +63,7 @@ def generate_data_monthly(src_path, dst_path, keywords):
             instance = json.loads(instance)
             month = instance['date'][5:7]
             path_per_month = dst_path.format(month)
-            with bz2.open(path_per_month, 'wb') as d_file:
+            with bz2.open(path_per_month, 'ab') as d_file:
                 d_file.write((json.dumps(instance)+'\n').encode('utf-8'))
 
 
@@ -96,19 +100,59 @@ def get_month(dataframe, col):
     return dataframe[col].apply(lambda x: int(x[5:7]))
 
 
-def split_quotes_per_gender(chunk, df_selected_parquet, qid_male, qid_female, qids_others, qids_wrong)
+def gender_in_parquet(df_parquet, df_qid):
+    # Keep the metadata from parquet where a gender is defined (i.e. not None)
+    df_parquet_gender_noNa = df_parquet.dropna(subset=['gender'])
+
+    # Creating lists of unique QID's for genders
+    unique_gender_id, unique_speaker_index = get_unique_list(df_parquet_gender_noNa.gender)
+    speakers_gender_qid = pd.DataFrame({'qids': unique_gender_id}) # sometimes, there are many genders for a speaker -> consider all of them
+
+    # Genders that are in parquet file and Quotebank
+    df_gender = df_qid[df_qid.QID.isin(speakers_gender_qid.qids)]
+
+    # Genders of speaker that are in Quotebank but NOT defined in the wikidata labels file
+    df_gender_ko = speakers_gender_qid[-speakers_gender_qid.qids.isin(df_gender.QID)]
+    
+    gender_names, gender_qids, speaker_qids, gender_description = [], [], [], []
+    count_not_rep = 0
+    for i in unique_speaker_index:
+        for j in df_parquet_gender_noNa.gender.iloc[i]:
+            speaker_qids.append(df_parquet_gender_noNa.id.iloc[i])
+            gender_qids.append(j)
+            gender_name = df_qid[df_qid.QID == j].Label.values
+            if len(gender_name)>0:
+                gender_names.append(gender_name[0])
+                gender_description.append(df_qid[df_qid.QID == j].Description.values[0])
+            else:
+                count_not_rep += 1
+                gender_names.append(f'--> Not repertiored [{count_not_rep}] ???')
+                gender_description.append('-')
+
+    return pd.DataFrame({'gender_names':gender_names, 'gender_qids':gender_qids, 'speaker_qids':speaker_qids, 'description': gender_description})\
+                            .groupby('gender_names').agg('first')
+    
+
+
+def split_quotes_per_gender(chunk, df_selected_parquet, df_qid, qid_male, qid_female, qids_others, qids_wrong, df_weekly_count):
     chunk['week']   = get_week(chunk, 'quoteID')
     chunk['month']  = get_month(chunk, 'quoteID')
+    
+    #_____
+    # ALL
+    #`````
+    df_weekly_count['all'] = df_weekly_count['all'].add(chunk.week.value_counts(), fill_value=0)
     
     #_________________
     # SPEAKER NONE
     #`````````````````
     q_is_speaker_None = chunk.speaker=='None' # Checker auusi pou les NaN -> isna()
     q_noSpeaker       = chunk[ q_is_speaker_None].copy()
-    q_speaker         = chunk[-q_is_speaker_None]
+    q_speaker         = chunk[-q_is_speaker_None].copy()
     q_speaker['qid'] = q_speaker.qids.apply(lambda x: x[0]) # 1st homonym
     q_speaker = q_speaker.drop(columns=['qids'])
     
+    df_weekly_count.speaker_None = df_weekly_count.speaker_None.add(q_noSpeaker.week.value_counts(), fill_value=0)
     
     # Merge with Parquet
     q_speaker = q_speaker.merge(df_selected_parquet, left_on='qid', right_on='id', how='left')
@@ -118,12 +162,13 @@ def split_quotes_per_gender(chunk, df_selected_parquet, qid_male, qid_female, qi
     #``````````````
     q_speaker_not_in_parquet = q_speaker.id.isna()
     q_speaker_noParquet  = q_speaker[q_speaker_not_in_parquet].copy()
+    df_weekly_count.speaker_noParquet = df_weekly_count.speaker_noParquet.add(q_speaker_noParquet.week.value_counts(), fill_value=0)
     
     q_speaker  = q_speaker[-q_speaker_not_in_parquet]
     
     '''
     #__________________
-    # SPEAKER NO LABEL
+    # SPEAKER NO LABEL    -> throw away too much quotes where we might know the speaker gender -> keep them
     #``````````````````
     q_is_speaker_labeled = q_speaker.qid.isin(df_qid.QID)
     q_speaker_noLabel = q_speaker[ -q_is_speaker_labeled]
@@ -138,21 +183,31 @@ def split_quotes_per_gender(chunk, df_selected_parquet, qid_male, qid_female, qi
     q_speaker = q_speaker[-q_gender_None]
     
     q_speaker['gender'] = q_speaker.gender.apply(lambda x: x[0]) # keep only 1st gender
+    df_weekly_count.none = df_weekly_count.none.add(q_None.week.value_counts(), fill_value=0)
+
+    
     
     #________________________________
     # MALE - FEMALE - OTHERS - WRONG - NOLABEL
     #````````````````````````````````
-    q_is_gender_labeled = q_speaker.gender.isin(df_qid.QID)
+    q_is_gender_labeled = q_speaker.gender.isin(df_qid.QID)  # should normaly always be empty by constrution (to verify)
     q_is_gender_male = q_speaker.gender.isin(qid_male)
     q_is_gender_female = q_speaker.gender.isin(qid_female)
     q_is_gender_others = q_speaker.gender.isin(qids_others)
     q_is_gender_wrong = q_speaker.gender.isin(qids_wrong)
     
     
-    q_noLabel  = q_speaker[q_is_gender_labeled].copy()
-    q_male     = q_speaker[q_is_gender_male].copy()
-    q_female   = q_speaker[q_is_gender_female].copy()
-    q_others   = q_speaker[q_is_gender_others].copy()
-    q_wrong    = q_speaker[q_is_gender_wrong].copy()
+    q_noLabel  = q_speaker[-q_is_gender_labeled]
+    q_male     = q_speaker[q_is_gender_male]
+    q_female   = q_speaker[q_is_gender_female]
+    q_others   = q_speaker[q_is_gender_others]
+    q_wrong    = q_speaker[q_is_gender_wrong]
+    
+    df_weekly_count.noLabel = df_weekly_count.noLabel.add(q_noLabel.week.value_counts(), fill_value=0)
+    df_weekly_count.male = df_weekly_count.male.add(q_male.week.value_counts(), fill_value=0)
+    df_weekly_count.female = df_weekly_count.female.add(q_female.week.value_counts(), fill_value=0)
+    df_weekly_count.others = df_weekly_count.others.add(q_others.week.value_counts(), fill_value=0)
+    df_weekly_count.wrong = df_weekly_count.wrong.add(q_wrong.week.value_counts(), fill_value=0)
+
     
     return q_male, q_female, q_others, q_wrong, q_noLabel, q_None, q_speaker_noParquet, q_noSpeaker

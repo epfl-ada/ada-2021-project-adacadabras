@@ -134,7 +134,20 @@ def gender_in_parquet(df_parquet, df_qid):
     
 
 
-def split_quotes_per_gender(chunk, df_selected_parquet, df_qid, qid_male, qid_female, qids_others, qids_wrong, df_weekly_count):
+def split_quotes_per_gender(chunk, df_selected_parquet, qid_male, qid_female, qids_others, qids_wrong, df_weekly_count):
+    ## To parse the full QuoteBank dataset:
+
+    #| YEAR | SIZE [GB] |   QUOTES    |  TIME [min] |
+    #|------|-----------|-------------|-------------|
+    #| 2015 |    3.3    |  20'874'338 |     22      |
+    #| 2016 |    2.3    |  13'862'129 |     20      |
+    #| 2017 |    5.2    |  26'611'588 |     47      |
+    #| 2018 |    4.8    |  27'228'451 |     46      |
+    #| 2019 |    3.6    |  21'763'302 |     36      |
+    #| 2020 |     .8    |   5'244'449 |      6      |
+    #|------|-----------|-------------|-------------|
+    #| SUM  |   20.0    | 115'584'257 |    177      |
+    
     chunk['week']   = get_week(chunk, 'quoteID')
     chunk['month']  = get_month(chunk, 'quoteID')
     
@@ -161,14 +174,14 @@ def split_quotes_per_gender(chunk, df_selected_parquet, df_qid, qid_male, qid_fe
     # SPEAKER NO PARQUET
     #``````````````
     q_speaker_not_in_parquet = q_speaker.id.isna()
-    q_speaker_noParquet  = q_speaker[q_speaker_not_in_parquet].copy()
+    q_speaker_noParquet  = q_speaker[q_speaker_not_in_parquet]
     df_weekly_count.speaker_noParquet = df_weekly_count.speaker_noParquet.add(q_speaker_noParquet.week.value_counts(), fill_value=0)
     
     q_speaker  = q_speaker[-q_speaker_not_in_parquet]
     
     '''
     #__________________
-    # SPEAKER NO LABEL    -> throw away too much quotes where we might know the speaker gender -> keep them
+    # SPEAKER NO LABEL    ---> "throw away" too much quotes where we might know the speaker gender -> keep them
     #``````````````````
     q_is_speaker_labeled = q_speaker.qid.isin(df_qid.QID)
     q_speaker_noLabel = q_speaker[ -q_is_speaker_labeled]
@@ -188,26 +201,23 @@ def split_quotes_per_gender(chunk, df_selected_parquet, df_qid, qid_male, qid_fe
     
     
     #________________________________
-    # MALE - FEMALE - OTHERS - WRONG - NOLABEL
+    # MALE - FEMALE - OTHERS - WRONG
     #````````````````````````````````
-    q_is_gender_labeled = q_speaker.gender.isin(df_qid.QID)  # should normaly always be empty by constrution (to verify)
+    # NOLABELED gender are in OTHER - done in part 2) Parquet Analyse
     q_is_gender_male = q_speaker.gender.isin(qid_male)
     q_is_gender_female = q_speaker.gender.isin(qid_female)
     q_is_gender_others = q_speaker.gender.isin(qids_others)
     q_is_gender_wrong = q_speaker.gender.isin(qids_wrong)
     
-    
-    q_noLabel  = q_speaker[-q_is_gender_labeled]
     q_male     = q_speaker[q_is_gender_male]
     q_female   = q_speaker[q_is_gender_female]
     q_others   = q_speaker[q_is_gender_others]
     q_wrong    = q_speaker[q_is_gender_wrong]
     
-    df_weekly_count.noLabel = df_weekly_count.noLabel.add(q_noLabel.week.value_counts(), fill_value=0)
     df_weekly_count.male = df_weekly_count.male.add(q_male.week.value_counts(), fill_value=0)
     df_weekly_count.female = df_weekly_count.female.add(q_female.week.value_counts(), fill_value=0)
     df_weekly_count.others = df_weekly_count.others.add(q_others.week.value_counts(), fill_value=0)
     df_weekly_count.wrong = df_weekly_count.wrong.add(q_wrong.week.value_counts(), fill_value=0)
 
     
-    return q_male, q_female, q_others, q_wrong, q_noLabel, q_None, q_speaker_noParquet, q_noSpeaker
+    return q_male, q_female, q_others, q_wrong, q_None, q_speaker_noParquet, q_noSpeaker

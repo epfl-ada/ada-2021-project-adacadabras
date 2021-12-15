@@ -23,12 +23,6 @@ ___Study of the influence of the movement on women's mediatic representation___
   * The misogynous category takes the value 1 if the tweet is considered misogynous and 0 if not.
   * The misogyny_category classify misogynous tweets as: “stereotype” , “dominance”, “derailing” and “sexual_harassment”.
   * Size: ~300KB.
-* **AD3 : [Metooma dataset](https://huggingface.co/datasets/metooma#social-impact-of-dataset) and [README](https://github.com/huggingface/datasets/blob/master/datasets/metooma/README.md)**: dataset similar to AMI composed of set of tweets belonging to the #MeToo movement, labelled to train NLP models to detect the tone of a speech and support or opposition to the movement. Here is a list of relevant information about it:
-  * Divided into a train (7979 english tweets) and test dataset (1996 english tweets).
-  * Tab-separated with the following fields: TweetId, Text_Only_Informative, Image_Only_Informative, Directed_Hate, Generalized_Hate, Sarcasm, Allegation, Justification, Refutation, Support, Oppose.
-  * Tweet contents should be accessed using TweetId and twitter API.
-* **AD4 : [Allegations list](https://www.vox.com/a/sexual-harassment-assault-allegations-list/frankie-shaw)**  : list of 262 CEO’s, celebrities, politicians and others who have been accused of sexual misconduct between 2017 and 2020 in the scope of the #MeToo movement. This list is available on the internet and will be extracted by scraping the HTML page of the website. Additional information on the profession of the aggressor is available in the data and might be used for further analysis.
-
 ## Methods
 
 **Step 1: Data scraping, pre-processing and dataset construction.**
@@ -60,6 +54,7 @@ Plot previously collected (step 5) data distributions according to time. Compari
 
 **Further details on the proposed data pipelines can be found in the notebook.**
 
+**Note: Since Milestone 2, we redirected some aspects of our project, namely the aditionnal datasets have changed due to ungranted access. Additionnally, some steps of the data analysis pipeline have been reframed along the in-depth discovery and analysis of the build datasets.**
 ## Proposed timeline
 
 * Step 2: 22/11/21
@@ -68,6 +63,10 @@ Plot previously collected (step 5) data distributions according to time. Compari
 * Step 6, 7: 13/12/21
 
 ## Organization within the team
+Paul:
+Joseph: 
+Amaëlle: 
+Louis:
 
 * SpaCy Training on AD2 and AD3: Teammate 1
 * Datastory: Teammate 2

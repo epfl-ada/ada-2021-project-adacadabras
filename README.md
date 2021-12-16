@@ -2,6 +2,8 @@
 
 ___Study of the influence of the movement on women's mediatic representation___
 
+## Datastory website
+https://ldrame21.github.io/metoo-media-impact/
 ## Abstract
 
 “#MeToo". Two words, a hashtag, civil rights movement with tremendous impacts on our society. Everything starts on October 15th, 2017, with a viral Twitter hashtag from Alyssa Milano. The movement, initially created by Tarana Burke, spread all over the world, inviting women to break silence on sexual harassment, violence, discrimination via social networks. The medias stepped in with widespread coverage and enhanced the movement's influence. Finally, women inequalities and the unsafe climate created by actors of society became a trending and polarizing topic on all media. Still, the question of the size of MeToo's impact on women's discrimination is to be answered. Via the metric of women's mediatic coverage, our project aims at assessing and quantifying the impact of #MeToo on the place of women in society. By using Quotebank dataset from 2015 to 2020, we will investigate the evolution of women’s mediatization through time and correlate it to #MeToo's key turning points.
@@ -16,7 +18,7 @@ ___Study of the influence of the movement on women's mediatic representation___
 ## Proposed additional datasets
 
 * **AD1 : [Wikidata speakers_attribute.parquet](https://drive.google.com/drive/folders/1VAFHacZFh0oxSxilgNByb1nlNsqznUf0)**: dataset provided in the scope of the ADA course, to access Wikidata metadata on Quotebank speakers. The format of the data can be found in the schema_speakers_attribute.txt file. We scrap only the attributes "fields date_of_birth", "party" and "gender" for the investigation of biases in the speakers addressing the MeToo movement in media.
-* **AD2 : [AMI (Automatic Misogyny Detection) Iber Eval dataset](https://drive.google.com/drive/folders/13UfLXcPTvT9bEAPP8tLj2quXGGa2gsTq)**  : dataset created to train NLP models to detect misogynistic speech in tweets and online content.
+* **AD2 : [TODO](TODO)**  : dataset created to train NLP models to detect misogynistic speech in tweets and online content. TODO
   * Divided into a train and test dataset.
   * Train dataset : composed of 3’251 english and 3’307 spanish tweets. Spanish tweets will be deleted.
   * Tab-separated with the following fields: “id” “tweet” “misogynous” “misogyny_category” “target”.
@@ -64,8 +66,9 @@ Plot previously collected (Step 2, Step 5, Step 6) data distributions according 
 * Step 3, 4: 29/11/21
 * Step 5: 06/12/21
 * Step 6, 7, 8: 13/12/21
+
 ## Organization within the team
-Paul: Wikidata scrapping. Descriptive analysis of data. Speaker analysis. Construction of subsets D1.1, D1.2, D2.1, D2.2.  
+Paul: Wikidata scrapping. Descriptive analysis of data. Speaker analysis. Construction of subsets D1.1-3, D2.1-3.
 Joseph: Pre-processing of Quotebank dataset. Construction of D1, D2, D3. Website development. Datastory.
 Amaëlle: NLP pipeline and Wordcloud processing. Notebook cleaning and discussions. Read_me. General project planning. 
 Louis: SpaCy Training on AD2 with a classifier on misogynist quotes. Read_me. General project planning. Website development.

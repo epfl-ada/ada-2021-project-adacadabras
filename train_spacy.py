@@ -1,4 +1,3 @@
-#train_spacy.py
 import pandas as pd
 import spacy
 import string
@@ -6,12 +5,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-from sklearn.svm import LinearSVC
-from sklearn.svm import LinearSVC
-import pickle
-import re
 
-nlp = spacy.load('en_core_web_sm')
+import re
 
 def remove_url(text):
     url = re.compile(r"https?://\S+|www\.\S+")
@@ -54,44 +49,3 @@ def text_data_cleaning(sentence):
         if token not in nlp.Defaults.stop_words and token not in punct:
             cleaned_tokens.append(token)
     return cleaned_tokens
-
-
-'''####MAIN#########
-
-PATH_DATA = './data/data_nlp/'
-AD1_FILE = PATH_DATA + 'MeTooHate.csv'
-CHUNK_SIZE = 1000
-
-#Clean data
-df = pd.read_csv(AD1_FILE)
-df.drop(columns=['status_id', 'created_at', 'favorite_count', 'retweet_count',
-       'location', 'followers_count', 'friends_count', 'statuses_count',
-       ], inplace=True)
-
-df.dropna(inplace=True)
-
-#create spacy
-nlp = spacy.load('en_core_web_sm')
-punct = string.punctuation
-
-###tfidf and classifier
-tfidf = TfidfVectorizer(tokenizer=text_data_cleaning)
-classifier = LinearSVC(verbose=True)
-
-#Train/test data
-X = df.text
-y = df.category
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42 )
-
-clf = Pipeline([('tfidf', tfidf), ('clf', classifier)], verbose=True)
-clf.fit(X_train, y_train)
-
-y_pred = clf.predict(X_test)
-
-print(classification_report(y_test,y_pred))
-
-print('Confusion matrix: ',confusion_matrix(y_test, y_pred))
-
-#Save model in pickle
-filename = './data/data_nlp/classifier.sav'
-pickle.dump(clf, open(filename, 'wb'))'''

@@ -2,7 +2,7 @@
 
 ___Study of the influence of the movement on women's mediatic representation___
 
-## Project's Notebook available [here](mhttps://github.com/epfl-ada/ada-2021-project-adacadabras/blob/main/notebook/metoo-media-impact-women.ipynb)
+## Project's Notebook available [here](https://github.com/epfl-ada/ada-2021-project-adacadabras/blob/main/notebook/metoo-media-impact-women.ipynb)
 
 The complete notebook of our project can be found in our repository, it is called:
 `metoo-media-impact-women.ipynb`.

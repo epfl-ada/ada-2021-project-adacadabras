@@ -46,7 +46,7 @@ Weekly percentage and counts of quotes by author’s gender (men, women, other, 
 Train SpaCy [SpaCy NLP model](https://spacy.io/usage/training) model on AD2 for misogynistic or non misogynistic. Classification thanks to trained model on D2.
 
 **Step 5: Investigate gender and generational biases in general women coverage using NLP to answer question B).**
-Subdivision of D2 into D2.1, D2.2 for biases investigation. Weekly percentage and counts of quotes by age and gender categories. Classification of quotes : NLTK, Vader models models for positive, negative or neutral probabilities and compounds. Subdivision of D2 into D2.3.
+Subdivision of D2 into D2.1, D2.2 for biases investigation. Weekly percentage and counts of quotes by age and gender categories. Classification of quotes : NLTK, Vader models models for positive, negative or neutral probabilities and compounds. Subdivision of D2 into D2.3. Descriptive analysis of D1.3 over time.
 
 **Step 6: Investigate gender and generational biases in MeToo coverage using NLP to answer question A).**
 Subdivision of D1 into D1.1, D1.2 and D1.3 for biases investigation. Weekly percentage and counts of quotes by age and gender categories. Classification of quotes : NLTK, Vader models for positive, negative or neutral probabilities and compounds. Subdivision of D1 into D1.3. Descriptive analysis of D1.3 over time.
@@ -65,7 +65,7 @@ Plot previously collected (Step 2, Step 5, Step 6) data distributions according 
 * Step 5: 06/12/21
 * Step 6, 7, 8: 13/12/21
 ## Organization within the team
-Paul: Wikidata scrapping. Descriptive analysis of data. Speaker analysis. Construction of subsets D2.1, D2.3.  
+Paul: Wikidata scrapping. Descriptive analysis of data. Speaker analysis. Construction of subsets D1.1, D1.2, D2.1, D2.2.  
 Joseph: Pre-processing of Quotebank dataset. Construction of D1, D2, D3. Website development. Datastory.
 Amaëlle: NLP pipeline and Wordcloud processing. Notebook cleaning and discussions. Read_me. General project planning. 
 Louis: SpaCy Training on AD2 with a classifier on misogynist quotes. Read_me. General project planning. Website development.

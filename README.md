@@ -2,9 +2,15 @@
 
 ___Study of the influence of the movement on women's mediatic representation___
 
-## Datastory website
+# Project's Notebook available [here](metoo-media-impact-women)
 
-https://ldrame21.github.io/metoo-media-impact/
+The complete notebook can be found on our Repository's main page, it is called:
+`metoo-media-impact-women.ipynb`.
+# Project's Data Story available [here](https://ldrame21.github.io/metoo-media-impact/
+
+The Data story we created for this project can be found at the following URL:
+https://ldrame21.github.io/metoo-media-impact/.
+
 
 ## Abstract
 

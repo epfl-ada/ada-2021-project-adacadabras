@@ -5,8 +5,7 @@ local/
 # data and test folders
 data/*
 data
-notebook/*
-notebook
+
 
 # For mac users only
 .DS_Store*

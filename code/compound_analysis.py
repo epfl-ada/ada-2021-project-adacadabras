@@ -14,6 +14,10 @@ import numpy as np
 
 
 def compute_error(mean, count, alpha=0.05):
+    '''
+    Input: mean, count and the significance level
+    Return: standard error * z_score
+    '''
     z_score = stats.t.ppf(q=1-alpha/2, df=count-1)
     mean = np.abs(mean)
     std_err = np.sqrt(mean*(1-mean)/count)
@@ -21,7 +25,9 @@ def compute_error(mean, count, alpha=0.05):
     return z_score*std_err
 
 def plotly_barplot(years, df_compounds1, df_compounds2, df_compounds3, df_metoo_compounds1, df_metoo_compounds2, df_metoo_compounds3):
-    
+    '''
+    Generate a plotly barplot with error bars for the weekly compound it  and export as compound_bar.html.
+        '''
     fig = go.Figure()
     for i, year in enumerate(years):
 
@@ -125,20 +131,23 @@ def plotly_barplot(years, df_compounds1, df_compounds2, df_compounds3, df_metoo_
 
 
 def generate_barplot(PATH_DATA, datasets, years):
-
+    '''
+    Preprocess the data to be plotted on the bar plot with plotly_barplot().
+    Files from line 144 to 149 must be downloaded and added to the right folder.
+     '''
     datasets = ['women', 'metoo']
     years = [2015, 2017, 2019]
     df_compounds1, df_compounds2, df_compounds3 = [], [], []
     df_metoo_compounds1, df_metoo_compounds2, df_metoo_compounds3 = [], [], []
 
     for year in years:
-        QUOTES_FILE = PATH_DATA + datasets[0] + f'/quotes-{year}-filtered_sentiment_age_compounds_per_gender_age_8_3.json.bz2'
-        QUOTES_FILE2 = PATH_DATA + datasets[0] + f'/quotes-{year}-filtered_sentiment_age_compounds_per_gender_age_15_10.json.bz2'
-        QUOTES_FILE3 = PATH_DATA + datasets[0] + f'/quotes-{year}-filtered_sentiment_age_compounds_per_gender_age.json.bz2'
+        QUOTES_FILE = PATH_DATA + f'/quotes-{year}-filtered_sentiment_age_compounds_per_gender_age_8_3.json.bz2'
+        QUOTES_FILE2 = PATH_DATA + f'/quotes-{year}-filtered_sentiment_age_compounds_per_gender_age_15_10.json.bz2'
+        QUOTES_FILE3 = PATH_DATA + f'/quotes-{year}-filtered_sentiment_age_compounds_per_gender_age.json.bz2'
 
-        QUOTES_metoo_FILE = PATH_DATA + datasets[1] + f'/quotes-{year}-filtered_metoo_sentiment_age_compounds_per_gender_age_8_3.json.bz2'
-        QUOTES_metoo_FILE2 = PATH_DATA + datasets[1] + f'/quotes-{year}-filtered_metoo_sentiment_age_compounds_per_gender_age_15_10.json.bz2'
-        QUOTES_metoo_FILE3 = PATH_DATA + datasets[1] + f'/quotes-{year}-filtered_metoo_sentiment_age_compounds_per_gender_age.json.bz2'
+        QUOTES_metoo_FILE = PATH_DATA + f'/quotes-{year}-filtered_metoo_sentiment_age_compounds_per_gender_age_8_3.json.bz2'
+        QUOTES_metoo_FILE2 = PATH_DATA + f'/quotes-{year}-filtered_metoo_sentiment_age_compounds_per_gender_age_15_10.json.bz2'
+        QUOTES_metoo_FILE3 = PATH_DATA + f'/quotes-{year}-filtered_metoo_sentiment_age_compounds_per_gender_age.json.bz2'
 
         df_compound1 = pd.read_json(QUOTES_FILE, lines=True, compression='bz2', typ='frame')
         df_compound1['error'] = df_compound1.apply(lambda x: compute_error(x['mean'], x['count']), axis=1)

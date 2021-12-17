@@ -53,7 +53,7 @@ Weekly percentage and counts of quotes by author’s gender (men, women, other, 
 **Step 3: Generate annual/monthly word clouds based on dataset D2, general women coverage, with this [library.](https://github.com/amueller/word_cloud)**
 
 **Step 4: Investigate general women perception via dataset D2 in medias to answer question B).**
-Train SpaCy [SpaCy NLP model](https://spacy.io/usage/training) model on AD2 for misogynistic or non misogynistic. Classification thanks to trained model on D2.
+Train SpaCy [SpaCy NLP model](https://spacy.io/usage/training) model on AD2 for misogynistic or non misogynistic. Classification thanks to trained model on D2. Topic extraction on D2.
 
 **Step 5: Investigate gender and generational biases in general women coverage using NLP to answer question B).**
 Subdivision of D2 into D2.1, D2.2 for biases investigation. Weekly percentage and counts of quotes by age and gender categories. Classification of quotes : NLTK, Vader models models for positive, negative or neutral probabilities and compounds. Subdivision of D2 into D2.3. Descriptive analysis of D1.3 over time.

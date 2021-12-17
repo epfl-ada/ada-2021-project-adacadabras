@@ -29,7 +29,7 @@ https://ldrame21.github.io/metoo-media-impact/.
 * **AD2 : [online-misogyny-eacl2021](https://github.com/ellamguest/online-misogyny-eacl2021)**  : dataset created to train NLP models to detect misogynistic speech in redit posts and contents. We are using only the final_labels.csv.
   * Train dataset : composed of 6'567 english.
   * Comma-separated with the following fields used for our classifier: “level 1” with possible values "misogynistic" and "non-misogynistic".
-  * Based on this [paper](https://aclanthology.org/2021.eacl-main.114.pdf)
+  * Based on this [paper](https://aclanthology.org/2021.eacl-main.114.pdf).
 
 ## Methods
 
@@ -79,7 +79,8 @@ Plot previously collected (Step 2, Step 5, Step 6) data distributions according 
 
 ## Organization within the team
 
-Paul: Wikidata scrapping. Descriptive analysis of data. Speaker analysis. Construction of subsets D1.1-3, D2.1-3.
-Joseph: Pre-processing of Quotebank dataset. Construction of D1, D2, D3. Website development. Datastory.
-Amaëlle: NLP pipeline and Wordcloud processing. Notebook cleaning and discussions. Read_me. General project planning.
-Louis: SpaCy Training on AD2 with a classifier on misogynist quotes. Read_me. General project planning. Website development.
+Paul: Wikidata scrapping. Descriptive analysis of data. Speaker analysis. Construction of subsets D1.1-3, D2.1-3. Statistical analysis.
+Joseph: Pre-processing of Quotebank dataset. Construction of D1, D2, D3. Website development. Datastory. Plots.
+Amaëlle: NLP pipeline and Wordcloud processing. Notebook cleaning and discussions. Read_me. General project planning. Statistical analysis.
+Louis: SpaCy Training on AD2 with a classifier on misogynist quotes. Read_me. General project planning. Website development. Plots. Statistical analysis.
+

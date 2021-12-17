@@ -41,13 +41,17 @@ def plot_distrib(df_weekly_all, dataset):
     plt.xlabel('percentage of women speaker')
     
     mean_b4 = round(percent_b4_metoo.mean(), 3)
+    std_b4 = round(percent_b4_metoo.std(), 3)
     mean_post = round(percent_post_metoo.mean(), 3)
+    std_post = round(percent_post_metoo.std(), 3)
     p_value = stats.ttest_ind(percent_b4_metoo, percent_post_metoo, nan_policy="omit").pvalue
 
 
     print(f'*************Graph {dataset}*************')
     print(f'mean before #MeToo = {mean_b4}')
     print(f'mean after #MeToo = {mean_post}')
+    print(f'std before #MeToo = {std_b4}')
+    print(f'std after #MeToo = {std_post}')
     print(f'p-value {p_value}')
 
 

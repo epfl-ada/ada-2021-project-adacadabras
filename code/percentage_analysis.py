@@ -24,11 +24,6 @@ import json
 
 
 def plot_distrib(df_weekly_all, dataset):
-    '''
-    This function aim to plot the weekly percentage of women speaker in the media from 2015 to 2020.
-    The percentages have been plotted for the three datasets () and a fitted curve have been added to have a better
-    view on the increase of women speakers.
-    '''
     #before meetoo is from 2015 (0) to september 2017 (week 152)
     percent_b4_metoo = df_weekly_all.iloc[0:152].percent_women
     #after meetoo is from september 2017 till 2020
@@ -46,21 +41,21 @@ def plot_distrib(df_weekly_all, dataset):
     plt.xlabel('percentage of women speaker')
     
     mean_b4 = round(percent_b4_metoo.mean(), 3)
+    std_b4 = round(percent_b4_metoo.std(), 3)
     mean_post = round(percent_post_metoo.mean(), 3)
+    std_post = round(percent_post_metoo.std(), 3)
     p_value = stats.ttest_ind(percent_b4_metoo, percent_post_metoo, nan_policy="omit").pvalue
 
 
     print(f'*************Graph {dataset}*************')
     print(f'mean before #MeToo = {mean_b4}')
     print(f'mean after #MeToo = {mean_post}')
+    print(f'std before #MeToo = {std_b4}')
+    print(f'std after #MeToo = {std_post}')
     print(f'p-value {p_value}')
 
 
 def plotly_distrib(df, datasets):
-    '''
-    This function generate a plotly graph and export it as percent_graph.html for using it on
-    a website.
-    '''
 
     fig = go.Figure()
     name = ['General (entire quotebank)', 'When talking about women', 'When talking about #MeToo']

@@ -3,9 +3,6 @@
 local/
 
 # data and test folders
-data/*
-data
-
 
 # For mac users only
 .DS_Store*
